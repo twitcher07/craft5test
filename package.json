@@ -1,6 +1,5 @@
 {
   "name": "craft-5-test",
-  "private": true,
   "scripts": {
     "build": "vite build",
     "dev": "vite",
