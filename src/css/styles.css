@@ -1,0 +1,8 @@
+/* --------------------------------- */
+/* Tailwind Base                     */
+/* --------------------------------- */
+@import 'tailwindcss';
+@import './theme.css';
+
+
+@source '../../templates/**/*';

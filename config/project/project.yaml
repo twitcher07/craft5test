@@ -1,0 +1,82 @@
+dateModified: 1745614848
+email:
+  fromEmail: tyrel@2dimes.com
+  fromName: 'Craft 5 Test'
+  transportType: craft\mail\transportadapters\Sendmail
+meta:
+  __names__:
+    4bfc3311-c93f-4bc4-b38d-6e6c71e83a85: 'Craft 5 Test' # Craft 5 Test
+    30cb262c-d491-48ca-bde1-46ddffc84375: 'Craft 5 Test' # Craft 5 Test
+    cb978261-aa2b-4dfa-841a-977efae2bf6b: Homepage # Homepage
+    e294d63e-4725-488b-ae04-33dd00e13cb5: Simple # Simple
+    ed1ab0e4-6a72-4906-9266-2e4d69b7f8f0: Homepage # Homepage
+plugins:
+  ckeditor:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.0.0
+  cloner:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  dashboard-begone:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  embeddedassets:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  field-manager:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  hyper:
+    edition: standard
+    enabled: true
+    licenseKey: LY7JU1YQOP9JOCXA366AZMUU
+    schemaVersion: 1.0.0
+  image-optimize:
+    edition: standard
+    enabled: true
+    licenseKey: O7KS8WECL7BM1LTL4Y9WD33S
+    schemaVersion: 1.0.0
+  image-resizer:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.0
+  mailgun:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  retcon:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  retour:
+    edition: standard
+    enabled: true
+    licenseKey: PRWEK2KWL59MBHSOJ58SY147
+    schemaVersion: 3.0.12
+  seomatic:
+    edition: standard
+    enabled: true
+    licenseKey: TAUMEUR3AOKS7QKXXOL62RJ2
+    schemaVersion: 3.0.12
+  vite:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+system:
+  edition: solo
+  live: true
+  name: 'Craft 5 Test'
+  schemaVersion: 5.7.0.3
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  require2fa: false
+  requireEmailVerification: true

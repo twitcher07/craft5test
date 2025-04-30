@@ -1,0 +1,32 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dotenv
+/.env
+
+# Composer
+vendor
+!src/**/vendor
+
+# Craft CMS
+web/cpresources
+config/license.key
+
+# npm
+node_modules
+package-lock.json
+
+# temporary build files
+.tmp
+web/hot
+
+# Ignore frontend files that are part of vite build process
+faviconData.json
+web/dist
+
+# ignore Craft uploaded assets
+web/uploads

@@ -1,0 +1,117 @@
+{% set assetVersion = "0.0.1" %}
+{% set mainStylesheet = "src/css/styles.css" %}
+{% set includeCriticalCss = includeCriticalCss ?? false %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" class="{% if htmlClass is defined %}{{ htmlClass }}{% endif %}">
+
+    <head>
+
+        <!--
+            =============================================================== 
+                              Website Custom made by:
+            ██████╗  █████╗ ██████╗  █████╗ ██████╗ ██╗ ██████╗ ███╗   ███╗
+            ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║██╔════╝ ████╗ ████║
+            ██████╔╝███████║██████╔╝███████║██║  ██║██║██║  ███╗██╔████╔██║
+            ██╔═══╝ ██╔══██║██╔══██╗██╔══██║██║  ██║██║██║   ██║██║╚██╔╝██║
+            ██║     ██║  ██║██║  ██║██║  ██║██████╔╝██║╚██████╔╝██║ ╚═╝ ██║
+            ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝ ╚═════╝ ╚═╝     ╚═╝
+                               Marketing & Creative
+            ===============================================================
+            A Branding Agency based in Memphis, TN
+            https://2dimes.com
+        -->
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="home" href="{{ siteUrl }}" />
+
+        {# Favicon Meta goes here #}
+
+        {# DNS prefetching here #}
+
+        {# Font embeds here #}
+
+        {# CSS #}
+        {% if criticalCss is defined and criticalCss and not craft.vite.devServerRunning() and craft.app.request.getParam("criticalcss") is null %}
+
+            {# loadCSS #}
+            <script>
+                /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+                !function(a){"use strict";var b=function(b,c,d){function j(a){if(e.body)return a();setTimeout(function(){j(a)})}function l(){f.addEventListener&&f.removeEventListener("load",l),f.media=d||"all"}var g,e=a.document,f=e.createElement("link");if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1]}var i=e.styleSheets;f.rel="stylesheet",f.href=b,f.media="only x",j(function(){g.parentNode.insertBefore(f,c?g:g.nextSibling)});var k=function(a){for(var b=f.href,c=i.length;c--;)if(i[c].href===b)return a();setTimeout(function(){k(a)})};return f.addEventListener&&f.addEventListener("load",l),f.onloadcssdefined=k,k(l),f};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+                /*! loadCSS rel=preload polyfill. [c]2017 Filament Group, Inc. MIT License */
+                !function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(a){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+            </script>
+
+            {{ craft.vite.includeCriticalCssTags() }}
+
+            {% css craft.vite.asset(mainStylesheet) with {
+                rel: 'preload',
+                as: 'style',
+                onload: 'this.rel=\'stylesheet\''
+            } %}
+
+        {% else %}
+            
+            {% css craft.vite.asset(mainStylesheet) %}
+            
+        {% endif %}
+            
+        {% if not craft.vite.devServerRunning() %}
+            
+            <noscript><link rel="stylesheet" href="{{ craft.vite.asset(mainStylesheet) }}"></noscript>
+
+        {% endif %}
+
+        {% block head %}{% endblock head %}
+
+    </head>
+
+    <body class="{{ bodyClass | default() }}">
+
+        <a class="sr-only focus:not-sr-only" href="#main-content">{{ "Skip to main content"|t }}</a>
+
+        {% include "_includes/main-navigation" %}
+
+        {% block hero %}{% endblock %}
+
+        <main id="main-content" role="main">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include "_includes/footer" %}
+
+        {{ craft.vite.script("src/js/main.js") }}
+
+        {% block footerJsFiles %}{% endblock %}
+
+        {# For when you need to do inline javascript after the main.js loads #}
+        {% block footerInlineScript %}{% endblock %}
+
+        {# https://browser-update.org #}
+        <script>
+            var $buoop = {
+                    required: {
+                        e:-2,
+                        f:-2,
+                        o:-2,
+                        s:-2,
+                        c:-2,
+                    },
+                    mobile: false,
+                    insecure:true,
+                    shift_page_down:false,
+                    api:2019.06
+                };
+            function $buo_f(){
+                var e = document.createElement("script");
+                e.src = "//browser-update.org/update.min.js";
+                document.body.appendChild(e);
+            };
+            try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+            catch(e){window.attachEvent("onload", $buo_f)}
+        </script>
+
+    </body>
+
+</html>

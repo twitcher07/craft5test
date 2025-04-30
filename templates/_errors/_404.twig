@@ -1,0 +1,46 @@
+{######################
+TEMPLATE SETTINGS
+######################}
+
+{# Extends #}
+{% extends "_layout/_main" %}
+
+{# Page classes #}
+
+{# Import Macros #}
+{% import "_macros/_global" as macros %}
+
+{# Other #}
+
+{######################
+END TEMPLATE SETTINGS
+######################}
+
+
+
+{% block content %}
+
+    <div class="pt-8 mb-4">
+        <div class="container mx-auto text-center">
+            <h1 class="{{ macros.headingClass("h2") }}">Oops, looks like that page is missing.</h1>
+        </div>
+    </div>
+
+    <section class="pb-8">
+
+        <div class="max-w-900 mx-auto px-1">
+    
+            <div class="text-1p2 text-center">
+                <p>Sorry, but we can't seem to find the page you requested. You can try going to the home page and starting over.</p>
+
+                <div class="mt-4 flex justify-center">
+                    <a class="btn btn--primary btn--lg" href="{{ siteUrl }}">Go to Homepage</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

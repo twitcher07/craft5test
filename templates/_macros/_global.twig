@@ -1,0 +1,128 @@
+{#
+    Renders Alt Text for images
+    Alt Text field then Caption field then defaults to Title
+#}
+{% macro altText(fieldName) %}
+    alt="{{ fieldName.altText ??? fieldName.caption ??? fieldName.title }}"
+{% endmacro %}
+
+
+{#
+    Adds tailwind classes using mmikkel/retcon plugin to basic rich text elements so they can be styled.
+#}
+{% macro richTextRetcon(fieldName) %}
+    {{ fieldName | retcon([
+        ['attr', 'h2', { class: 'text-2p4 lg:text-2p6 uppercase leading-none mb-1'}],
+        ['attr', 'h3', { class: 'text-2 lg:text-2p4 uppercase leading-none mb-1'}],
+        ['attr', 'h4', { class: 'text-1p4 lg:text-2 uppercase leading-none mb-1'}],
+        ['attr', 'h5', { class: 'text-1p2 lg:text-1p4 uppercase leading-tight mb-1'}],
+        ['attr', 'h6', { class: 'text-1 uppercase font-normal tracking-widest leading-tight mb-1'}],
+        ['attr', 'p:not(:last-child), p:first-child:not(:last-child)', { class: 'leading-relaxed mb-2'}],
+        ['attr', 'p:last-child', { class: 'leading-relaxed'}],
+        ['attr', 'ul', { class: 'custom-list custom-list--teal my-2'}],
+        ['attr', 'li', { class: 'mb-1'}],
+        ['attr', 'ol', { class: 'list-decimal pl-2 my-2'}],
+        ['attr', 'ol ol, ul ol', { class: 'list-lower-roman pl-2 mt-1'}],
+        ['attr', 'a', { class: 'text-primary underline hover:no-underline focus:no-underline'}]
+    ]) }}
+{% endmacro %}
+
+
+{# 
+    Heading classes
+#}
+{% macro headingClass(type) %}
+    {% if type|lower == "h1" %}
+        text-2p6 lg:text-4 leading-tight
+    {% elseif type|lower == "h2" %}
+        text-2p4 lg:text-3 leading-tight
+    {% elseif type|lower == "h3" %}
+        text-2 lg:text-2p4 leading-tight
+    {% elseif type|lower == "h4" %}
+        text-1p4 lg:text-2 leading-tight
+    {% elseif type|lower == "h6" %}
+        text-1 uppercase tracking-widest leading-tight
+    {% endif %}
+{% endmacro %}
+
+
+{# 
+    SVG data placeholder
+#}
+{% macro svgPlaceholder(width = 16, height = 16) %}
+    src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 {{ width }} {{ height }}' style%3D'background:%23e3e3e2' %2F%3E"
+{% endmacro %}
+
+
+{# 
+    Responsive image snippet with help from image optimize plugin.
+#}
+{% macro responsiveImage(image, imageOptimize = null, sizes = "100vw", lazyLoad = false, attr = { class: [] }, pictureAttr = {} ) %}
+
+    {% if attr and not attr.class is defined %}
+        {% set attr = attr|merge({ class: [] }) %}
+    {% endif %}
+
+    {% if attr and lazyLoad %}
+        {% set attr = attr|merge({ class: attr.class|merge(['lazy']) }) %}
+    {% elseif lazyLoad %}
+        {% set attr = { class: ['lazy'] } %}
+    {% endif %}
+
+    {% if image.extension == "svg" %}
+
+        <img {{ attr ? attr(attr) }}
+            {% if lazyLoad %}
+                data-src="{{ image.url }}"
+            {% else %}
+                src="{{ image.url }}"
+            {% endif %}
+                width="{{ image.width }}"
+                height="{{ image.height }}" 
+                {{ _self.altText(image) }}>
+
+    {% elseif imageOptimize and imageOptimize.optimizedImageUrls|length %}
+
+        <picture {{ pictureAttr ? attr(pictureAttr) }}>
+            <source {% if lazyLoad %}
+                data-sizes="{{ sizes }}"
+                data-srcset="{{ imageOptimize.srcsetWebp() }}"
+                {% else %}
+                    sizes="{{ sizes }}"
+                    srcset="{{ imageOptimize.srcsetWebp() }}"
+                {% endif %}
+                type="image/webp">
+
+            <img {{ attr ? attr(attr) }}
+                {% if lazyLoad %}
+                    src="{{ imageOptimize.placeholderImage() }}"
+                    data-src="{{ imageOptimize.src() }}"
+                    data-srcset="{{ imageOptimize.srcset() }}"
+                    data-sizes="{{ sizes }}"
+                {% else %}
+                    src="{{ imageOptimize.src() }}"
+                    srcset="{{ imageOptimize.srcset() }}"
+                    sizes="{{ sizes }}"
+                {% endif %}
+                width="{{ imageOptimize.maxSrcsetWidth() }}"
+                height="{{ imageOptimize.variantHeights[imageOptimize.maxSrcsetWidth()] }}" 
+                {{ _self.altText(image) }}>
+        </picture>
+
+    {% else %}
+
+        <img {{ attr ? attr(attr) }}
+            {% if lazyLoad %}
+                data-src="{{ image.url }}"
+                data-sizes="{{ sizes }}"
+            {% else %}
+                src="{{ image.url }}"
+                sizes="{{ sizes }}"
+            {% endif %}
+                width="{{ image.width }}"
+                height="{{ image.height }}" 
+                {{ _self.altText(image) }}>
+
+    {% endif %}
+
+{% endmacro %}

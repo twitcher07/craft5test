@@ -1,0 +1,59 @@
+@theme static {
+
+    /* Breakpoints */
+    --breakpoint-sm: 551px;
+    --breakpoint-md: 769px;
+    --breakpoint-lg: 1025px;
+    --breakpoint-xl: 1441px;
+    --breakpoint-2xl: 1921px;
+
+    /* Fonts */
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --font-heading: "Bricolage Grotesque", sans-serif;
+
+    /* Colors */
+    --color-cool-gray-50: #f5f8fa;
+    --color-cool-gray-100: #ebf1f5;
+    --color-cool-gray-200: #d0dee7;
+    --color-cool-gray-300: #a6c1d3;
+    --color-cool-gray-400: #769fba;
+    --color-cool-gray-500: #5583a2;
+    --color-cool-gray-600: #416c88;
+    --color-cool-gray-700: #36586e;
+    --color-cool-gray-800: #304a5c;
+    --color-cool-gray-900: #2c404e;
+    --color-cool-gray-950: #1d2b34;
+
+    --color-black: #333333;
+
+    --color-white: #FFFFFF;
+
+    --color-transparent: transparent;
+    
+    --color-blue: #071539;
+    --color-blue-50: #e8f7ff;
+    --color-blue-100: #d6efff;
+    --color-blue-200: #C1DCEE;
+    --color-blue-300: #88caff;
+    --color-blue-400: #53CFFF;
+    --color-blue-500: #00ADEF;
+    --color-blue-550: #009EE0;
+    --color-blue-600: #008fd4;
+    --color-blue-700: #0072ab;
+    --color-blue-800: #00608d;
+    --color-blue-900: #133d9c;
+    --color-blue-950: #071539;
+
+
+    --animate-wiggle: wiggle .5s ease-in-out infinite;
+    @keyframes wiggle {
+        0%,
+        100% {
+        transform: rotate(-3deg) scale(1);
+        }
+        50% {
+        transform: rotate(3deg) scale(1.05);
+        }
+    }
+
+}
